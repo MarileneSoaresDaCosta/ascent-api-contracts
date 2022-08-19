@@ -1,11 +1,25 @@
 @startuml
 'https://plantuml.com/sequence-diagram
-
 autonumber
+== Login ==
+User -> UI: username and password
+box "Firewall" #LightBlue
+participant Identity_Provider
+end box
+UI -> Identity_Provider: GET Authentication Request
+Identity_Provider -> IDENTITY_DB
+IDENTITY_DB ->  Identity_Provider: Success JWT
+Identity_Provider -> UI: Success JWT
 
-Alice -> Bob: Authentication Request
-Bob --> Alice: Authentication Response
+== Accessing Secure Resources ==
+User -> UI: access secured resource
+UI -> SS: request with JWT
+' ss validates token
+SS -> DB: query
+DB -> SS: data
+SS -> UI: formatted data
+UI -> User: presents data
 
-Alice -> Bob: Another authentication Request
-Alice <-- Bob: another authentication Response
+
+
 @enduml
