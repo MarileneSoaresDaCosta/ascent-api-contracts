@@ -1,6 +1,7 @@
 @startuml
 'https://plantuml.com/sequence-diagram
 autonumber
+
 == Login ==
 User -> UI: username and password
 box "Firewall" #LightBlue
@@ -14,10 +15,14 @@ Identity_Provider -> UI: Success JWT
 == Accessing Secure Resources ==
 User -> UI: access secured resource
 UI -> SS: request with JWT
-' ss validates token
+activate SS
+SS -> SS : Validates Token
+
+
 SS -> DB: query
 DB -> SS: data
 SS -> UI: formatted data
+deactivate SS
 UI -> User: presents data
 
 
