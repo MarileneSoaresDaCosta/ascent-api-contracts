@@ -103,14 +103,15 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schema/update-cat'
+              $ref: '#/components/schemas/update-cat'
       responses:
         '200':
           description: Cat's role updated successfully
-            content:
-              application/json:
-                schema:
-                  $ref: '#/components/schema/cat'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/cat'
+
         '204':
           description: Cat not found
         '400':
